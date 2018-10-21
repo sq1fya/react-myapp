@@ -2,7 +2,7 @@ import React, { Component } from "react";
 
 class Counter extends Component {
   state = {
-    value: this.props.value,
+    value: this.props.counter.value,
     tags: []
   };
 
@@ -28,23 +28,25 @@ class Counter extends Component {
     );
   }
 
-  handleIncrement = (product) => {
+  handleIncrement = product => {
     this.setState({ value: this.state.value + 1 });
   };
 
   render() {
-
-    console.log(this.props);
-
     return (
       <div>
-        {this.props.children}
         <span className={this.getBadgeClasses()}>{this.formatCount()}</span>
         <button
-          onClick={ () => this.handleIncrement() }
+          onClick={() => this.handleIncrement()}
           className="btn btn-secondary btn-sm"
         >
-          Increment
+          Incment
+        </button>
+        <button
+          onClick={() => this.props.onDelete(this.props.counter.id)}
+          className="btn btn-danger btn-ms m-2"
+        >
+          Delete
         </button>
         {this.state.tags.length === 0 && "Please create a new Tag!"}
         {this.renderTags()}
